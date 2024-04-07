@@ -23,9 +23,7 @@ stages:
 
     - task: CmdLine@2
       inputs:
-        script: |
-         'echo  '$(System.DefaultWorkingDirectory)'
-         'dir'
+        script: 'dir'
       
     - task: Docker@2
       displayName: Build an image

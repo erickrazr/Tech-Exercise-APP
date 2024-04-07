@@ -1,4 +1,6 @@
 # Starter pipeline
+
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -17,3 +19,12 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: ECRPullImage@1
+  inputs:
+    awsCredentials: 'AWS-Cloudbrick'
+    regionName: 'us-east-2'
+    repository: 'te-ecr'
+    imageSource: 'imagetag'
+    logRequest: true
+    logResponse: true

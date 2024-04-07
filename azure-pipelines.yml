@@ -29,8 +29,8 @@ stages:
       displayName: Build an image
       inputs:
         command: build
-        dockerfile: '/app/Dockerfile'
-        buildContext: '/app/'
+        dockerfile: 'app/Dockerfile'
+        buildContext: 'app/'
         repository: guestBookNode
 
     - task: ECRPushImage@1

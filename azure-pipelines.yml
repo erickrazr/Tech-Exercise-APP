@@ -55,7 +55,8 @@ stages:
           command: 'plan'
           workingDirectory: 'infra'
           environmentServiceNameAWS: 'AWS Terraform'
-        
+          backendAWSBucketName: 'te-eks-lab'
+
       - task: TerraformTaskV4@4
         displayName: Terraform Apply - EKS 
         inputs:
@@ -63,4 +64,5 @@ stages:
           command: 'apply'
           workingDirectory: 'infra'
           environmentServiceNameAWS: 'AWS Terraform'
+          backendAWSBucketName: 'te-eks-lab'
 

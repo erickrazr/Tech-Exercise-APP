@@ -18,8 +18,6 @@ stages:
   jobs:
   - job: Build_and_Push
     displayName: Build & Push Docker image
-    pool:
-      vmImage: ubuntu-latest
     steps:
       
     - task: Docker@2
@@ -55,4 +53,20 @@ stages:
           backendServiceAWS: 'AWS Terraform'
           backendAWSBucketName: 'te-eks-lab'
           backendAWSKey: 'tf/terraform.tfstate'
+      
+      - task: TerraformTaskV4@4
+        displayName: Terraform Plan - EKS
+        inputs:
+          provider: 'aws'
+          command: 'plan'
+          workingDirectory: 'infra'
+          environmentServiceNameAWS: 'AWS Terraform'
+        
+      - task: TerraformTaskV4@4
+        displayName: Terraform Apply - EKS 
+        inputs:
+          provider: 'aws'
+          command: 'apply'
+          workingDirectory: 'infra'
+          environmentServiceNameAWS: 'AWS Terraform'
 

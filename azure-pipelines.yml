@@ -20,10 +20,6 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-
-    - task: CmdLine@2
-      inputs:
-        script: 'dir'
       
     - task: Docker@2
       displayName: Build an image
@@ -32,11 +28,10 @@ stages:
         dockerfile: 'app/Dockerfile'
         buildContext: 'app/'
         repository: guestbooknode
-
     - task: ECRPushImage@1
       inputs:
-          awsCredentials: 'AWS-Cloudbrick'
-          regionName: 'us-east-2'
-          imageSource: 'imagename'
-          sourceImageName: 'guestbooknode'
-          repositoryName: 'guestbooknode'
+        awsCredentials: 'AWS-Cloudbrick'
+        regionName: 'us-east-2'
+        imageSource: 'imagename'
+        sourceImageName: 'guestbooknode'
+        repositoryName: 'guestbooknode'

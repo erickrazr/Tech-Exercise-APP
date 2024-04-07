@@ -27,6 +27,12 @@ stages:
         dockerfile: '/app/Dockerfile'
         buildContext: '/app/'
         repository: guestBookNode
+    - task: CmdLine@2
+      inputs:
+        script: |
+         'echo  '$(System.DefaultWorkingDirectory)'
+         'dir'
+      
 
     - task: ECRPushImage@1
       inputs:

@@ -20,6 +20,13 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
+
+    - task: CmdLine@2
+      inputs:
+        script: |
+         'echo  '$(System.DefaultWorkingDirectory)'
+         'dir'
+      
     - task: Docker@2
       displayName: Build an image
       inputs:
@@ -27,12 +34,6 @@ stages:
         dockerfile: '/app/Dockerfile'
         buildContext: '/app/'
         repository: guestBookNode
-    - task: CmdLine@2
-      inputs:
-        script: |
-         'echo  '$(System.DefaultWorkingDirectory)'
-         'dir'
-      
 
     - task: ECRPushImage@1
       inputs:

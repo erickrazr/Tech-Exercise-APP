@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crudnode-server-service 
+spec:
+  type: LoadBalancer
+  selector:
+    app: crudnode-server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

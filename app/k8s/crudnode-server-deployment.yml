@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crudnode-server-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: crudnode-server
+    spec:
+      containers:
+        - name: crudnode-server
+          image: 222668120177.dkr.ecr.us-east-2.amazonaws.com/te-ecr:latest
+          ports:
+            - containerPort: 3000
+              name: nodejs-port
+  selector:
+    matchLabels:
+      app: crudnode-server

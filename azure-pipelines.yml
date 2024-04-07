@@ -21,10 +21,6 @@ stages:
       vmImage: ubuntu-latest
     steps:
 
-    - task: CmdLine@2
-      inputs:
-        script: 'dir'
-      
     - task: Docker@2
       displayName: Build an image
       inputs:
@@ -39,5 +35,4 @@ stages:
           regionName: 'us-east-2'
           imageSource: 'imagename'
           sourceImageName: 'guestBookNode'
-          repositoryName: '222668120177.dkr.ecr.us-east-2.amazonaws.com'
-          autoCreateRepository: true
+          repositoryName: 'guestBookNode'

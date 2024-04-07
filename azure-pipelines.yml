@@ -47,6 +47,7 @@ stages:
     displayName: Terraform init - EKS
     steps: 
       - task: TerraformTaskV4@4
+        displayName: Terraform ini - EKS
         inputs:
           provider: 'aws'
           command: 'init'

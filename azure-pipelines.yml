@@ -11,20 +11,28 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: Docker
+  displayName: Build & Push Docker image to AWS ECR
+  jobs:
+  - job: Build_and_Push
+    displayName: Build & Push Docker image
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: build
+        dockerfile: '/app/Dockerfile'
+        buildContext: '/app/)'
+        repository: guestBookNode
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-- task: ECRPullImage@1
-  inputs:
-    awsCredentials: 'AWS-Cloudbrick'
-    regionName: 'us-east-2'
-    repository: 'te-ecr'
-    imageSource: 'imagetag'
-    logRequest: true
-    logResponse: true
+    - task: ECRPushImage@1
+      inputs:
+          awsCredentials: 'AWS-Cloudbrick'
+          regionName: 'us-east-2'
+          imageSource: 'imagename'
+          sourceImageName: 'guestBookNode'
+          repositoryName: '222668120177.dkr.ecr.us-east-2.amazonaws.com'
+          autoCreateRepository: true

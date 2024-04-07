@@ -39,3 +39,4 @@ stages:
           regionName: 'us-east-2'
           imageSource: 'imagename'
           sourceImageName: 'guestbooknode'
+          repositoryName: 'guestBookNode'

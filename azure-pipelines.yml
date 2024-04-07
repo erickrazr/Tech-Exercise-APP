@@ -1,6 +1,7 @@
 # Starter pipeline
 
 
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -37,3 +38,20 @@ stages:
         sourceImageName: 'guestbooknode'
         repositoryName: 'guestbooknode'
         pushTag: latest
+      
+
+- stage: EKS
+  displayName: Provisioning EKS Cluster
+  jobs:
+  - job: Terraform_Cluster_Provisioning
+    displayName: Terraform init - EKS
+    steps: 
+      - task: TerraformTaskV4@4
+        inputs:
+          provider: 'aws'
+          command: 'init'
+          workingDirectory: 'infra'
+          backendServiceAWS: 'AWS Terraform'
+          backendAWSBucketName: 'te-eks-lab'
+          backendAWSKey: 'tf/terraform.tfstate'
+

@@ -28,6 +28,7 @@ stages:
         dockerfile: 'app/Dockerfile'
         buildContext: 'app/'
         repository: guestbooknode
+        tags: latest
     - task: ECRPushImage@1
       inputs:
         awsCredentials: 'AWS-Cloudbrick'
@@ -35,3 +36,4 @@ stages:
         imageSource: 'imagename'
         sourceImageName: 'guestbooknode'
         repositoryName: 'guestbooknode'
+        pushTag: latest

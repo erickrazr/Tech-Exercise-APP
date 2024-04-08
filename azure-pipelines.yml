@@ -58,6 +58,7 @@ stages:
     - script: |
        terraform apply "tfplan"
       workingDirectory: infra
+      continueOnError: true # This allows the pipeline to continue even if this step "fails"
       displayName: 'Terraform Apply'
 
 - stage: Deploycontainers

@@ -23,7 +23,7 @@ stages:
 
     - script: |
         terraform --version
-        terraform init -backend-config=bucket=te-env-lab -backend-config=key=state/terraform.tfstate -backend-config=region=us-east-1 -backend-config=access_key=$(aws-access-key) -backend-config=secret_key=$(aws-secret-key) 
+        terraform init -reconfigure -backend-config=bucket=te-env-lab -backend-config=key=state/terraform.tfstate -backend-config=region=us-east-1 -backend-config=access_key=$(aws-access-key) -backend-config=secret_key=$(aws-secret-key) 
         terraform plan -out=tfplan -var 'AWS_ACCESS_KEY_ID=$(aws-access-key)' -var 'AWS_SECRET_ACCESS_KEY=$(aws-secret-key)'
         terraform apply -auto-approve tfplan
       displayName: 'Terraform Init and Apply'

@@ -93,8 +93,6 @@ module "eks" {
     ami_type = "AL2_x86_64"
 
   }
-   
-  ebs_optimized           = true
 
   eks_managed_node_groups = {
     one = {

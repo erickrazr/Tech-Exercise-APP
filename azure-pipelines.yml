@@ -47,6 +47,7 @@ stages:
           backendServiceAWS: 'AWS Terraform'
           backendAWSBucketName: 'te-env-lab'
           backendAWSKey: 'state/terraform.tfstate'
+          commandOptions: '-reconfigure'
 
 
       

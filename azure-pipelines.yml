@@ -33,34 +33,20 @@ stages:
       
 
 - stage: EKS
-  displayName: Provisioning EKS Cluster
+  displayName: 'Terraform Apply'
   jobs:
-  - job: Terraform_Cluster_Provisioning
-    displayName: Terraform init - EKS
-    steps: 
-      - task: TerraformTaskV4@4
-        displayName: Terraform init - EKS
-        inputs:
-          provider: 'aws'
-          command: 'init'
-          workingDirectory: 'infra'
-          backendServiceAWS: 'AWS Terraform'
-          backendAWSBucketName: 'te-env-lab'
-          backendAWSKey: 'state/terraform.tfstate'
+  - job: TerraformApply
+    displayName: 'Terraform Apply'
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
 
-      
-      - task: TerraformTaskV4@4
-        displayName: Terraform Plan - EKS
-        inputs:
-          provider: 'aws'
-          command: 'plan'
-          workingDirectory: 'infra'
-          environmentServiceNameAWS: 'AWS Terraform'
-
-      - task: TerraformTaskV4@4
-        inputs:
-          provider: 'aws'
-          command: 'apply'
-          commandOptions: 'state/terraform.tfstate'
-          environmentServiceNameAWS: 'AWS Terraform'
+    - script: |
+        terraform --version
+        echo "yes" | terraform init -backend-config=bucket=te-env-lab -backend-config=key=state/terraform.tfstate -backend-config=region=us-east-1 -backend-config=access_key=$(aws-access-key) -backend-config=secret_key=$(aws-secret-key) 
+        terraform plan -out=tfplan
+        terraform apply -auto-approve tfplan
+      displayName: 'Terraform Init and Apply'
+      workingDirectory: infra
 

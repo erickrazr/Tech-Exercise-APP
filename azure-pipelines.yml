@@ -45,15 +45,13 @@ stages:
           command: 'init'
           workingDirectory: 'infra'
           backendServiceAWS: 'AWS Terraform'
-          backendAWSBucketName: 'te-env-lab'
-          backendAWSKey: terraform.tfstate
+
       
       - task: TerraformTaskV4@4
         displayName: Terraform Plan - EKS
         inputs:
           provider: 'aws'
           command: 'plan'
-          commandOptions: '-out=tfstate'
           workingDirectory: 'infra'
           environmentServiceNameAWS: 'AWS Terraform'
 
@@ -61,6 +59,6 @@ stages:
         inputs:
           provider: 'aws'
           command: 'apply'
-          commandOptions: 'tfstate'
+          commandOptions: 'state/terraform.tfstate'
           environmentServiceNameAWS: 'AWS Terraform'
 

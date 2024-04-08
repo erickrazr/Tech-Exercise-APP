@@ -7,7 +7,29 @@ pool:
   name: Default
 
 stages:
-
+- stage: Docker
+  displayName: Build & Push Docker image to AWS ECR
+  jobs:
+  - job: Build_and_Push
+    displayName: Build & Push Docker image
+    steps:
+      
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: build
+        dockerfile: 'app/Dockerfile'
+        buildContext: 'app/'
+        repository: guestbooknode
+        tags: latest
+    - task: ECRPushImage@1
+      inputs:
+        awsCredentials: 'AWS-Cloudbrick'
+        regionName: 'us-east-2'
+        imageSource: 'imagename'
+        sourceImageName: 'guestbooknode'
+        repositoryName: 'guestbooknode'
+        pushTag: latest
       
 
 - stage: EKS
@@ -20,12 +42,30 @@ stages:
     - task: TerraformInstaller@0
       inputs:
         terraformVersion: 'latest'
-
+    
     - script: |
-        terraform --version
-        echo "no" | terraform init
-        terraform plan -out=tfplan -var 'AWS_ACCESS_KEY_ID=$(aws-access-key)' -var 'AWS_SECRET_ACCESS_KEY=$(aws-secret-key)'
-        terraform apply -auto-approve tfplan
-      displayName: 'Terraform Init and Apply'
+        echo "Initializing Terraform..."
+        echo "no" | terraform init terraform init
+      displayName: 'Terraform Init'
       workingDirectory: infra
 
+    - script: |
+        echo "Executing Terraform Plan..."
+        terraform plan -out=tfplan -var 'AWS_ACCESS_KEY_ID=$(aws-access-key)' -var 'AWS_SECRET_ACCESS_KEY=$(aws-secret-key)' -detailed-exitcode
+      displayName: 'Terraform Plan'
+      continueOnError: true # This allows the pipeline to continue even if this step "fails"
+      workingDirectory: infra
+
+    - script: |
+        plan_exit_code=$?
+        echo "Plan exit code: $plan_exit_code"
+        if [ $plan_exit_code -eq 2 ]
+        then
+          echo "Applying Terraform Plan..."
+          terraform apply tfplan
+        elif [ $plan_exit_code -eq 0 ]
+        then
+          echo "No changes detected in Terraform Plan."
+        else
+          exit 1 # Exit the pipeline as failed if Terraform plan failed to execute
+      displayName: 'Conditional Terraform Apply'

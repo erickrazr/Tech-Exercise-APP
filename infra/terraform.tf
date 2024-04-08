@@ -4,8 +4,10 @@
 terraform {
 
   cloud {
+    organization = "erickrazr"
+
     workspaces {
-      name = "learn-terraform-eks"
+      name = "TE-LAB-Workspace"
     }
   }
 

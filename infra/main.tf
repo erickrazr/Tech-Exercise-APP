@@ -101,7 +101,7 @@ module "eks" {
       name = "node-group-1"
      
       remote_access = {
-        ec2_ssh_key               = module.key_pair.key_pair_name
+        ec2_ssh_key               = te-us2-kp
         source_security_group_ids = [aws_security_group.remote_access.id]
       }
 

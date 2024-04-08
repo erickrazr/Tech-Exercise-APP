@@ -23,7 +23,7 @@ stages:
 
     - script: |
         terraform --version
-        terraform init
+        echo "no" | terraform init
         terraform plan
         terraform apply -auto-approve 
       displayName: 'Terraform Init and Apply'

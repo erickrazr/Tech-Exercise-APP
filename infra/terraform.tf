@@ -3,6 +3,8 @@
 
 terraform {
   cloud {
+    organization = "erickrazr"
+
     workspaces {
       name = "Tech-Exercise-wks"
     }

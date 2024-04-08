@@ -3,14 +3,6 @@
 
 terraform {
 
-  cloud {
-    organization = "erickrazr"
-
-    workspaces {
-      name = "TE-LAB-Workspace"
-    }
-  }
-
   required_providers {
     aws = {
       source  = "hashicorp/aws"

@@ -7,29 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Docker
-  displayName: Build & Push Docker image to AWS ECR
-  jobs:
-  - job: Build_and_Push
-    displayName: Build & Push Docker image
-    steps:
-      
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: 'app/Dockerfile'
-        buildContext: 'app/'
-        repository: guestbooknode
-        tags: latest
-    - task: ECRPushImage@1
-      inputs:
-        awsCredentials: 'AWS-Cloudbrick'
-        regionName: 'us-east-2'
-        imageSource: 'imagename'
-        sourceImageName: 'guestbooknode'
-        repositoryName: 'guestbooknode'
-        pushTag: latest
+
       
 
 - stage: EKS

@@ -62,9 +62,9 @@ stages:
          echo "Applying Terraform Plan..."
          terraform apply "tfplan"
         elif [ $(plan_exit_code) -eq 0 ]
-         then
+        then
           echo "No changes detected in Terraform Plan."
-         else
+        else
           echo "Terraform Plan failed."
           exit 1 # Exit the pipeline as failed if Terraform plan execution was unsuccessful
         fi

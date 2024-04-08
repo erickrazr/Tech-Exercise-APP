@@ -39,12 +39,13 @@ stages:
     displayName: Terraform init - EKS
     steps: 
       - task: TerraformTaskV4@4
-        displayName: Terraform ini - EKS
+        displayName: Terraform init - EKS
         inputs:
           provider: 'aws'
           command: 'init'
           workingDirectory: 'infra'
           backendServiceAWS: 'AWS Terraform'
+          backendAWSBucketName: 'te-env-lab'
 
       
       - task: TerraformTaskV4@4

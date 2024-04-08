@@ -24,8 +24,8 @@ stages:
     - script: |
         terraform --version
         echo "no" | terraform init
-        terraform plan
-        terraform apply -auto-approve 
+        terraform plan -out tfplan
+        terraform apply -auto-approve tfplan
       displayName: 'Terraform Init and Apply'
       workingDirectory: infra
 

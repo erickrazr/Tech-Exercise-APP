@@ -11,6 +11,7 @@ stages:
       
 
 - stage: EKS
+
   displayName: 'Terraform Apply'
   jobs:
   - job: TerraformApply
@@ -22,9 +23,9 @@ stages:
 
     - script: |
         terraform --version
-        terraform init
-        terraform plan 
-        terraform apply -auto-approve
+        echo "yes" | terraform init -backend-config=bucket=te-env-lab -backend-config=key=state/terraform.tfstate -backend-config=region=us-east-1 -backend-config=access_key=$(aws-access-key) -backend-config=secret_key=$(aws-secret-key) 
+        terraform plan -out=tfplan
+        terraform apply -auto-approve tfplan
       displayName: 'Terraform Init and Apply'
       workingDirectory: infra
 

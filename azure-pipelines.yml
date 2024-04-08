@@ -57,5 +57,15 @@ stages:
       workingDirectory: infra
 
     - script: |
+       if [ $(plan_exit_code) -eq 2 ]
+       then
+          echo "Applying Terraform Plan..."
           terraform apply "tfplan"
+        elif [ $(plan_exit_code) -eq 0 ]
+          then
+            echo "No changes detected in Terraform Plan."
+          else
+            echo "Terraform Plan failed."
+          exit 1 
+          fi
       displayName: 'Conditional Terraform Apply'

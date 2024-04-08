@@ -45,7 +45,7 @@ stages:
     
     - script: |
         echo "Initializing Terraform..."
-        echo "no" | terraform init terraform init
+        echo "no" | terraform init
       displayName: 'Terraform Init'
       workingDirectory: infra
 

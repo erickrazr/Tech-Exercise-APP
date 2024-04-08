@@ -4,7 +4,6 @@
 provider "aws" {
   region = var.region
   profile                 = "default"
-  region                  = "us-east-2"
 }
 
 # Filter out local zones, which are not currently supported 

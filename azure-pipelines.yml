@@ -43,11 +43,8 @@ stages:
         inputs:
           provider: 'aws'
           command: 'init'
-          commandOptions: '-migrate-state'
           workingDirectory: 'infra'
           backendServiceAWS: 'AWS Terraform'
-          backendAWSBucketName: 'te-env-lab'
-          backendAWSKey: 'state/terraform.tfstate'
 
       
       - task: TerraformTaskV4@4

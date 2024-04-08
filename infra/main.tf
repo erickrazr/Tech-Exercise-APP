@@ -2,9 +2,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 provider "aws" {
-  region     = "us-east-2"
-  access_key = $(aws-access-key)
-  secret_key = $(aws-secret-key)
+  region = var.region
 }
 
 # Filter out local zones, which are not currently supported 

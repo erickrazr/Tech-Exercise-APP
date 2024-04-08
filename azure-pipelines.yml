@@ -64,8 +64,8 @@ stages:
           echo "Applying Terraform Plan..."
           terraform apply tfplan
         elif [ $plan_exit_code -eq 0 ]
-        then
-          echo "No changes detected in Terraform Plan."
-        else
-          exit 1 # Exit the pipeline as failed if Terraform plan failed to execute
+          then
+            echo "No changes detected in Terraform Plan."
+          else
+            exit 1 # Exit the pipeline as failed if Terraform plan failed to execute
       displayName: 'Conditional Terraform Apply'

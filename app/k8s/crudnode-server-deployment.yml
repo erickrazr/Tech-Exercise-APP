@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: crudnode-server
-          image: 222668120177.dkr.ecr.us-east-2.amazonaws.com/te-ecr:latest
+          image: 222668120177.dkr.ecr.us-east-2.amazonaws.com/guestbooknode:latest
           securityContext:
             privileged: true
           ports:

@@ -59,3 +59,16 @@ stages:
        terraform apply "tfplan"
       workingDirectory: infra
       displayName: 'Terraform Apply'
+
+- stage: Deploycontainers
+  displayName: 'Deploy container'
+  jobs:
+  - job: DeployImages
+    displayName: 'Deploy Crudnode Environment'
+    steps:
+
+    - script: |
+        kubectl apply -f crudnode-server-deployment.yml
+        kubectl apply -f crudnode-server-service.yml
+      displayName: 'Deploy Node Image'
+      workingDirectory: app

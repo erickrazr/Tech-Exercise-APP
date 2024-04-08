@@ -51,7 +51,7 @@ stages:
 
     - script: |
         echo "Executing Terraform Plan..."
-        terraform plan -out=tfplan -var 'AWS_ACCESS_KEY_ID=$(aws-access-key)' -var 'AWS_SECRET_ACCESS_KEY=$(aws-secret-key)' -detailed-exitcode || echo "##vso[task.setvariable variable=plan_exit_code;]$?
+        terraform plan -out=tfplan -var 'AWS_ACCESS_KEY_ID=$(aws-access-key)' -var 'AWS_SECRET_ACCESS_KEY=$(aws-secret-key)' -detailed-exitcode || echo "##vso[task.setvariable variable=plan_exit_code;]$?"
       displayName: 'Terraform Plan'
       continueOnError: true # This allows the pipeline to continue even if this step "fails"
       workingDirectory: infra

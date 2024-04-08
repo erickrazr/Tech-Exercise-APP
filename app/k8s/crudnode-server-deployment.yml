@@ -14,6 +14,7 @@ spec:
           image: 222668120177.dkr.ecr.us-east-2.amazonaws.com/guestbooknode:latest
           securityContext:
             privileged: true
+            allowPrivilegeEscalation: true
           ports:
             - containerPort: 3000
               name: nodejs-port

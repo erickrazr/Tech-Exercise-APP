@@ -23,9 +23,9 @@ stages:
 
     - script: |
         terraform --version
-        echo "yes" | terraform init
-        terraform plan -out=tfplan -var 'AWS_ACCESS_KEY_ID=$(aws-access-key)' -var 'AWS_SECRET_ACCESS_KEY=$(aws-secret-key)'
-        terraform apply -auto-approve tfplan
+        terraform init
+        terraform plan
+        terraform apply -auto-approve 
       displayName: 'Terraform Init and Apply'
       workingDirectory: infra
 

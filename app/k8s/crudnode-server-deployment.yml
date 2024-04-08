@@ -9,12 +9,18 @@ spec:
       labels:
         app: crudnode-server
     spec:
+      volume:
+      - name: sec-ctx-vol
+        hostPath:
+          path: /etc
       containers:
         - name: crudnode-server
           image: 222668120177.dkr.ecr.us-east-2.amazonaws.com/guestbooknode:latest
+          volumeMounts:
+          - name: sec-ctx-vol
+            mountPath: /data
           securityContext:
             privileged: true
-            allowPrivilegeEscalation: true
           ports:
             - containerPort: 3000
               name: nodejs-port

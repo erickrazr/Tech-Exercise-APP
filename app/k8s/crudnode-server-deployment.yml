@@ -9,7 +9,7 @@ spec:
       labels:
         app: crudnode-server
     spec:
-      volume:
+      volumes:
       - name: sec-ctx-vol
         hostPath:
           path: /etc

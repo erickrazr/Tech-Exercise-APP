@@ -57,11 +57,11 @@ stages:
       workingDirectory: infra
 
     - script: |
-        if [ $(plan_exit_code) -eq 2 ]
+        if [ $(plan_exit_code) == 2 ]
          then
          echo "Applying Terraform Plan..."
          terraform apply "tfplan"
-        elif [ $(plan_exit_code) -eq 0 ]
+        elif [ $(plan_exit_code) == 0]
         then
           echo "No changes detected in Terraform Plan."
         else

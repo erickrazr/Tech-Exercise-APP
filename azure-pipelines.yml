@@ -22,9 +22,6 @@ stages:
         terraformVersion: 'latest'
 
     - script: |
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        unzip awscliv2.zip
-        sudo ./aws/install
         aws configure set $(aws-access-key) $(aws-secret-key)
         terraform --version
         terraform init -backend-config=bucket=te-env-lab -backend-config=key=state/terraform.tfstate -backend-config=region=us-east-1 -backend-config=access_key=$(aws-access-key) -backend-config=secret_key=$(aws-secret-key) 

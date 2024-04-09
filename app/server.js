@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 
 const ObjectId = require('mongodb').ObjectID
 const MongoClient = require('mongodb').MongoClient
-const uri = "mongodb://10.0.5.38:27017/crud-nodejs";
+const uri = "mongodb://10.0.74.223:27017/crud-nodejs";
 
 app.use(bodyParser.urlencoded({ extended: true }))
 

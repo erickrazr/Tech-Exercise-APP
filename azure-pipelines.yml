@@ -8,10 +8,10 @@ pool:
 
 stages:
 - stage: Docker
-  displayName: Build & Push Docker image to AWS ECR
+  displayName: Deploy Application to EKS
   jobs:
   - job: Build_and_Push
-    displayName: Build & Push Docker image
+    displayName: Build & Push & Deploy to EKS
     steps:
       
     - task: Docker@2
@@ -31,12 +31,9 @@ stages:
         repositoryName: 'guestbooknode'
         pushTag: latest
       
-  - job: DeployImages
-    displayName: 'Deploy Crudnode Environment'
-    steps:
     - script: |
         aws eks update-kubeconfig --region us-east-1 --name wiz-demo
-        kubectl apply -f app/crudnode-server-deployment.yml
-        kubectl apply -f app/crudnode-server-service.yml
+        kubectl apply -f k8s/crudnode-server-deployment.yml
+        kubectl apply -f k8s/crudnode-server-service.yml
       displayName: 'Deploy Node Image'
       workingDirectory: app

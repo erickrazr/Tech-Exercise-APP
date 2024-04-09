@@ -35,6 +35,7 @@ stages:
     displayName: 'Deploy Crudnode Environment'
     steps:
     - script: |
+        aws eks aws eks update-kubeconfig --name wiz-demo -region us-east-1
         kubectl apply -f k8s/crudnode-server-deployment.yml
         kubectl apply -f k8s/crudnode-server-service.yml
       displayName: 'Deploy Node Image'

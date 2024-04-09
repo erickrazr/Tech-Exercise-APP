@@ -36,7 +36,7 @@ stages:
     steps:
     - script: |
         aws eks update-kubeconfig --region us-east-1 --name wiz-demo
-        kubectl apply -f crudnode-server-deployment.yml
-        kubectl apply -f crudnode-server-service.yml
+        kubectl apply -f app/crudnode-server-deployment.yml
+        kubectl apply -f app/crudnode-server-service.yml
       displayName: 'Deploy Node Image'
       workingDirectory: app

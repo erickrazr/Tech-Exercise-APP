@@ -32,7 +32,7 @@ stages:
         pushTag: latest
       
     - script: |
-        kubectl apply -f k8s/crudnode-ns.yaml
+        kubectl apply -f k8s/crudnode-namespace.yaml
         kubectl apply -f k8s/crudnode-server-deployment.yml
         kubectl apply -f k8s/crudnode-server-service.yml
       displayName: 'Deploy Node Image'

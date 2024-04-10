@@ -32,7 +32,6 @@ stages:
         pushTag: latest
       
     - script: |
-        aws eks update-kubeconfig --region us-east-1 --name wiz-demo
         kubectl apply -f k8s/crudnode-server-deployment.yml
         kubectl apply -f k8s/crudnode-server-service.yml
       displayName: 'Deploy Node Image'

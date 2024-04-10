@@ -1,7 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: crudnode-server-service 
+  name: crudnode-server-service
+  namespace: crudnode-ns
 spec:
   type: LoadBalancer
   selector:

@@ -16,7 +16,7 @@ spec:
           path: /etc
       containers:
         - name: crudnode-server
-          image: 222668120177.dkr.ecr.us-east-2.amazonaws.com/guestbooknode:latest
+          image: 373329633988.dkr.ecr.us-east-1.amazonaws.com/guestbooknode:latest
           volumeMounts:
           - name: sec-ctx-vol
             mountPath: /data

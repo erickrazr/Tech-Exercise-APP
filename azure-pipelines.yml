@@ -24,7 +24,7 @@ stages:
         tags: latest
     - task: ECRPushImage@1
       inputs:
-        awsCredentials: 'AWS-Cloudbrick'
+        awsCredentials: 'AWS-ErickrazrPersonal'
         regionName: 'us-east-1'
         imageSource: 'imagename'
         sourceImageName: 'guestbooknode'

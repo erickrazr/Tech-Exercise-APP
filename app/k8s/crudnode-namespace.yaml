@@ -4,3 +4,6 @@ metadata:
   name: crudnode-ns
   labels:
     name: crudnode-ns
+  name: spring4shell-ns
+  labels:
+    name: spring4shell-ns

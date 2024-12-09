@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crudnode-server-deployment
+  namespace: crudnode-ns
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: crudnode-server
+    spec:
+      volumes:
+      - name: sec-ctx-vol
+        hostPath:
+          path: /etc
+      containers:
+        - name: crudnode-server
+          image: 373329633988.dkr.ecr.us-east-1.amazonaws.com/guestbooknode:latest
+          volumeMounts:
+          - name: sec-ctx-vol
+            mountPath: /data
+          securityContext:
+            privileged: true
+          ports:
+            - containerPort: 3000
+              name: nodejs-port
+  selector:
+    matchLabels:
+      app: crudnode-server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: s4shell-server-deployment
+  namespace: s4shell-ns
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: s4shell-server
+    spec:
+      volumes:
+      - name: sec-ctx-vol
+        hostPath:
+          path: /etc
+      containers:
+        - name: s4shell-server
+          image: 373329633988.dkr.ecr.us-east-1.amazonaws.com/s4shell:latest
+          volumeMounts:
+          - name: sec-ctx-vol
+            mountPath: /data
+          securityContext:
+            privileged: true
+          ports:
+            - containerPort: 8080
+              name: s4shell-port
+  selector:
+    matchLabels:
+      app: s4shell-server

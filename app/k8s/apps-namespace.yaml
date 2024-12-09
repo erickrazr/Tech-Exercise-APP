@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: crudnode-ns
+  labels:
+    name: crudnode-ns
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: s4shell-ns
+  labels:
+    name: s4shell-ns

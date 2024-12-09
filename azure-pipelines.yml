@@ -25,14 +25,15 @@ stages:
       displayName: 'Run Checkov Scan'
       
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build Node Image
       inputs:
         command: build
-        dockerfile: 'app/Dockerfile'
-        buildContext: 'app/'
+        dockerfile: 'app/node-app/Dockerfile'
+        buildContext: 'app/node-app'
         repository: guestbooknode
         tags: latest
     - task: ECRPushImage@1
+      displayName: Push Node Image
       inputs:
         awsCredentials: 'AWS-ErickrazrPersonal'
         regionName: 'us-east-1'
@@ -40,10 +41,28 @@ stages:
         sourceImageName: 'guestbooknode'
         repositoryName: 'guestbooknode'
         pushTag: latest
+
+    - task: Docker@2
+      displayName: Build Spring4shell Image
+      inputs:
+        command: build
+        dockerfile: 'app/s4shell-app/Dockerfile'
+        buildContext: 'app/s4shell-app/'
+        repository: s4shell
+        tags: latest
+    - task: ECRPushImage@1
+      displayName: Push Node Image
+      inputs:
+        awsCredentials: 'AWS-ErickrazrPersonal'
+        regionName: 'us-east-1'
+        imageSource: 'imagename'
+        sourceImageName: 's4shell'
+        repositoryName: 's4shell'
+        pushTag: latest
       
     - script: |
-        kubectl apply -f k8s/crudnode-namespace.yaml
-        kubectl apply -f k8s/crudnode-server-deployment.yml
-        kubectl apply -f k8s/crudnode-server-service.yml
-      displayName: 'Deploy Node Image'
+        kubectl apply -f k8s/apps-namespace.yaml
+        kubectl apply -f k8s/apps-server-deployment.yml
+        kubectl apply -f k8s/apps-server-service.yml
+      displayName: 'Deploy Applications'
       workingDirectory: app

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: s4shell-server-service
+  namespace: s4shell-ns
+spec:
+  type: LoadBalancer
+  selector:
+    app: s4shell-server
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  name: s4shell-server-service
+  namespace: s4shell-ns

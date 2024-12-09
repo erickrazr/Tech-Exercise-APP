@@ -63,6 +63,7 @@ stages:
     - script: |
         kubectl apply -f k8s/apps-namespace.yaml
         kubectl apply -f k8s/apps-server-deployment.yml
-        kubectl apply -f k8s/apps-server-service.yml
+        kubectl apply -f k8s/node-server-service.yml
+        kubectl apply -f k8s/s4shell-server-service.yml
       displayName: 'Deploy Applications'
       workingDirectory: app

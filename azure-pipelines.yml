@@ -51,7 +51,7 @@ stages:
         repository: s4shell
         tags: latest
     - task: ECRPushImage@1
-      displayName: Push Node Image
+      displayName: Push Spring4Shell Image
       inputs:
         awsCredentials: 'AWS-ErickrazrPersonal'
         regionName: 'us-east-1'

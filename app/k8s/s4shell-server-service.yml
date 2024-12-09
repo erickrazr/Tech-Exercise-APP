@@ -11,5 +11,3 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
-  name: s4shell-server-service
-  namespace: s4shell-ns

@@ -11,5 +11,3 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 3000
-  name: crudnode-server-service
-  namespace: crudnode-ns

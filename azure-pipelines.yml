@@ -21,7 +21,7 @@ stages:
 
     - script: |
         echo "Running Checkov scan"
-        checkov -d . --soft-fail --check "HIGH,CRITICAL" --skip-check "LOW,MEDIUM"
+        checkov -d . --soft-fail --skip-check "LOW,MEDIUM"
       displayName: 'Run Checkov Scan'
       
     - task: Docker@2

@@ -37,9 +37,6 @@ spec:
       containers:
         - name: s4shell-server
           image: 373329633988.dkr.ecr.us-east-1.amazonaws.com/s4shell:latest
-          volumeMounts:
-          - name: sec-ctx-vol
-            mountPath: /data
           securityContext:
             privileged: true
           ports:
